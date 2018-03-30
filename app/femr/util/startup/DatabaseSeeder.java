@@ -18,8 +18,8 @@
 */
 package femr.util.startup;
 
-import com.avaje.ebean.Ebean;
-import com.avaje.ebean.ExpressionList;
+import io.ebean.Ebean;
+import io.ebean.ExpressionList;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import femr.business.helpers.QueryProvider;

@@ -18,7 +18,7 @@
 */
 package femr.business.services.system;
 
-import com.avaje.ebean.ExpressionList;
+import io.ebean.ExpressionList;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import femr.business.helpers.QueryProvider;
@@ -154,7 +154,7 @@ public class InventoryService implements IInventoryService {
         MedicationItem medicationItem;
         try {
 
-            medicationInventory = medicationInventoryExpressionList.findUnique();
+            medicationInventory = medicationInventoryExpressionList.findOne();
             if (medicationInventory == null) {
                 //it doesn't yet exist, create a new one
                 medicationInventory = dataModelMapper.createMedicationInventory(quantityTotal, quantityTotal, medicationId, tripId);
