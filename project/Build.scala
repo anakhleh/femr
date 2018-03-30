@@ -25,7 +25,8 @@ object ApplicationBuild extends Build {
     "org.apache.commons" % "commons-collections4" % "4.0",
     "com.google.code.gson" % "gson" % "2.3.1",
     "com.itextpdf" % "itextpdf" % "5.5.6",
-    "com.itextpdf.tool" % "xmlworker" % "5.5.6"
+    "com.itextpdf.tool" % "xmlworker" % "5.5.6",
+    "com.h2database" % "h2" % "1.4.193"
   )
 
 
