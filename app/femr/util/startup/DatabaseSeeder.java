@@ -32,7 +32,7 @@ import femr.data.models.mysql.concepts.ConceptDiagnosis;
 import femr.util.calculations.dateUtils;
 import femr.util.encryptions.IPasswordEncryptor;
 import femr.util.stringhelpers.StringUtils;
-import play.Configuration;
+import com.typesafe.config.Config;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +53,7 @@ public class DatabaseSeeder {
     private final IRepository<ITab> tabRepository;
     private final IRepository<IVital> vitalRepository;
 
-    private final Configuration configuration;
+    private final Config configuration;
     private final IPasswordEncryptor passwordEncryptor;
 
     @Inject
@@ -69,7 +69,7 @@ public class DatabaseSeeder {
                           IRepository<ITabFieldType> tabFieldTypeRepository,
                           IRepository<ITab> tabRepository,
                           IRepository<IVital> vitalRepository,
-                          Configuration configuration,
+                          Config configuration,
                           IPasswordEncryptor passwordEncryptor) {
 
         this.patientRepository = patientRepository;
