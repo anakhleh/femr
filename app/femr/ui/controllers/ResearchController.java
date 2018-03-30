@@ -34,7 +34,7 @@ import femr.ui.models.research.json.ResearchItemModel;
 import femr.ui.views.html.research.index;
 import femr.ui.models.research.FilterViewModel;
 import femr.util.stringhelpers.StringUtils;
-import org.apache.commons.lang3.text.WordUtils;
+import org.apache.commons.text.WordUtils;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
