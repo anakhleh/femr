@@ -19,6 +19,7 @@ object ApplicationBuild extends Build {
     javaCore,
     javaJdbc,
     evolutions,
+    jodaForms,
     "com.google.inject" % "guice" % "4.1.0",
     "mysql" % "mysql-connector-java" % "5.1.40",
     "org.mindrot" % "jbcrypt" % "0.3m",
