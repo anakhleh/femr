@@ -21,7 +21,7 @@ object ApplicationBuild extends Build {
     evolutions,
     jodaForms,
     "com.google.inject" % "guice" % "4.1.0",
-    "mysql" % "mysql-connector-java" % "5.1.40",
+    "mysql" % "mysql-connector-java" % "5.1.41",
     "org.mindrot" % "jbcrypt" % "0.3m",
     "org.apache.commons" % "commons-collections4" % "4.0",
     "com.google.code.gson" % "gson" % "2.3.1",
