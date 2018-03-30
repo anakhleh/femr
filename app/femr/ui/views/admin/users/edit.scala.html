@@ -27,8 +27,8 @@
 
 @admin("Edit User", currentUser, styles = additionalStyles, scripts = additionalScripts, message = additionalMessages) {
     <div class="container">
-    @helper.form(action = UsersController.editPost(Integer.parseInt(form("userId").value())), 'name -> "createForm") {
-        <input type="hidden" value="@form("userId").value()" name="userId"/>
+    @helper.form(action = UsersController.editPost(Integer.parseInt(form("userId").getValue.get())), 'name -> "createForm") {
+        <input type="hidden" value="@form("userId").getValue" name="userId"/>
 
 
         <div class="editWrapBoth" id="editWrapLeft">
@@ -55,7 +55,7 @@
             )
 
             <label>Password Reset?*</label>
-            @if(form("passwordReset").value == "true") {
+            @if(form("passwordReset").getValue.get() == "true") {
                 <input type="checkbox" name="passwordReset" checked="checked"/>
             } else {
                 <input type="checkbox" name="passwordReset"/>
@@ -89,9 +89,9 @@
                 <tbody>
                     @helper.repeat(form("missionTripItems"), min = 0) { trip =>
                         <tr>
-                            <td>@form(trip.name.toString + ".teamName").value</td>
-                            <td>@form(trip.name.toString + ".tripCountry").value</td>
-                            <td>@form(trip.name.toString + ".friendlyTripStartDate").value</td>
+                            <td>@form(trip.name.toString + ".teamName").getValue.get()</td>
+                            <td>@form(trip.name.toString + ".tripCountry").getValue.get()</td>
+                            <td>@form(trip.name.toString + ".friendlyTripStartDate").getValue.get()</td>
                         </tr>
 
                     }
