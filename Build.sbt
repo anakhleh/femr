@@ -5,7 +5,7 @@ import com.typesafe.sbt.gzip.Import._
 import com.typesafe.sbt.web.Import._
 
 
-name := "fEMR"
+val appName = "fEMR"
 val appVersion = "2.3.9-beta"
 val currentScalaVersion = "2.11.7"
 
@@ -15,7 +15,7 @@ val appDependencies = Seq(
   javaJdbc,
   evolutions,
   jodaForms,
-  "com.google.inject" % "guice" % "4.1.0",
+  guice,
   "mysql" % "mysql-connector-java" % "5.1.41",
   "org.mindrot" % "jbcrypt" % "0.3m",
   "org.apache.commons" % "commons-collections4" % "4.0",
@@ -31,6 +31,7 @@ val main = (project in file(".")).enablePlugins(PlayJava, PlayEbean).settings(
   javacOptions += "-Xlint:deprecation", //*/   //use when searching for deprecated API usage
   javacOptions += "-Xlint:unchecked", //*/     //use when you want to display java warnings
   version := appVersion,
+  name := appName,
   scalaVersion := currentScalaVersion,
   libraryDependencies ++= appDependencies,
   pipelineStages := Seq(digest, gzip),
