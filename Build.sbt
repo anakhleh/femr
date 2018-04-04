@@ -5,7 +5,7 @@ import com.typesafe.sbt.gzip.Import._
 import com.typesafe.sbt.web.Import._
 
 
-val appName = "fEMR"
+val appName = "femr"
 val appVersion = "2.3.9-beta"
 val currentScalaVersion = "2.11.7"
 
