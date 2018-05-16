@@ -379,7 +379,7 @@ public class InventoryController extends Controller {
 
     /**
      * Called when a user hits the remove button to remove a medication from the trip formulary.
-     * @param medicationID
+     * @param medicationId
      * @param tripId
      * @return Result of soft-deletion
      */
