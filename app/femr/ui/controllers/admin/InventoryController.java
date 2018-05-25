@@ -400,7 +400,6 @@ public class InventoryController extends Controller {
      * @return Result of readding (undo-ing soft deletion)
      */
     public Result ajaxReadd(int medicationId, int tripId){
-        System.out.println("in ajaxReadd");
         ServiceResponse<MedicationItem> inventoryServiceResponse = inventoryService.reAddInventoryMedication(medicationId, tripId);
 
         if (inventoryServiceResponse.hasErrors()) {
