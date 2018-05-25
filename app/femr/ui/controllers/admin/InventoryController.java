@@ -246,9 +246,14 @@ public class InventoryController extends Controller {
 
             int medicationId = createMedicationServiceResponse.getResponseObject().getId();
             int quantity = inventoryViewModelPost.getMedicationQuantity();
+
+            ServiceResponse<MedicationItem> createMedicationInventoryServiceResponse;
             //Creates an inventory for the Medication
-            ServiceResponse<MedicationItem> createMedicationInventoryServiceResponse =
-                    inventoryService.createMedicationInventory(medicationId, tripId);
+            if (inventoryService.existsInventoryMedicationInTrip(medicationId, tripId).getResponseObject()){
+                createMedicationInventoryServiceResponse = inventoryService.reAddInventoryMedication(medicationId, tripId);
+            } else {
+                createMedicationInventoryServiceResponse = inventoryService.createMedicationInventory(medicationId, tripId);
+            }
             //sets initial total quantity
             ServiceResponse<MedicationItem> setQuantityTotalServiceResponse =
                     inventoryService.setQuantityTotal(medicationId, tripId, quantity);
