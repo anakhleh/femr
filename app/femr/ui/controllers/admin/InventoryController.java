@@ -383,8 +383,25 @@ public class InventoryController extends Controller {
      * @param tripId
      * @return Result of soft-deletion
      */
-    public Result ajaxDelete(int medicationID, int tripId) {
-        ServiceResponse<MedicationItem> inventoryServiceResponse = inventoryService.toggleDeletionStateOfInventoryMedication(medicationID, tripId);
+    public Result ajaxDelete(int medicationId, int tripId) {
+        ServiceResponse<MedicationItem> inventoryServiceResponse = inventoryService.deleteInventoryMedication(medicationId, tripId);
+
+        if (inventoryServiceResponse.hasErrors()) {
+            throw new RuntimeException();
+        }
+        return ok("true");
+    }
+
+    /**
+     * Called when a user hits the undo button to readd a medication from the trip formulary.
+     *
+     * @param medicationId
+     * @param tripId
+     * @return Result of readding (undo-ing soft deletion)
+     */
+    public Result ajaxReadd(int medicationId, int tripId){
+        System.out.println("in ajaxReadd");
+        ServiceResponse<MedicationItem> inventoryServiceResponse = inventoryService.reAddInventoryMedication(medicationId, tripId);
 
         if (inventoryServiceResponse.hasErrors()) {
             throw new RuntimeException();
