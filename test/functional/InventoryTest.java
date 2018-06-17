@@ -80,6 +80,7 @@ public class InventoryTest/* extends FluentTest*/{
         //password requirements as of 2.4.0: >= 8 chars long, >= 1 special char, >= 1 number, >= 1 uppercase, >= 1 lowercase
         private static String TEST_ADMIN_PASSWORD = "Test_Admin_User_Password1";
         Application application;
+        TestServer server;
 
 
         public InventoryTest() {
@@ -93,7 +94,8 @@ public class InventoryTest/* extends FluentTest*/{
                     .in(Mode.TEST)
                     .build();
 
-            Helpers.start(this.application);
+            //Helpers.start(this.application);
+            server = testServer(19001, application);
         }
 
         private void failIfOtherTestsFailed() {
@@ -131,13 +133,13 @@ public class InventoryTest/* extends FluentTest*/{
                 ForHumanConvenience.playBeforeAllTestStartSound();
 //                Class.forName(jdbcDriver);
                 try {
-                    Transaction txn = Ebean.beginTransaction();
-                    Connection conn = txn.getConnection();
-                    Statement s = conn.createStatement();
-                    s.executeUpdate("DROP DATABASE IF EXISTS femr_test");
-                    s.executeUpdate("CREATE DATABASE IF NOT EXISTS femr_test");
-                    Ebean.commitTransaction();
-                    Ebean.endTransaction();
+                    // Transaction txn = Ebean.beginTransaction();
+                    // Connection conn = txn.getConnection();
+                    // Statement s = conn.createStatement();
+                    // s.executeUpdate("DROP DATABASE IF EXISTS femr_test");
+                    // s.executeUpdate("CREATE DATABASE IF NOT EXISTS femr_test");
+                    // Ebean.commitTransaction();
+                    // Ebean.endTransaction();
                     // Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/?user=root&password=8Mary2BOO89&useSSL=false");
                     // Statement s = conn.createStatement();
                     // s.executeUpdate("DROP DATABASE IF EXISTS femr_test");
@@ -162,7 +164,7 @@ public class InventoryTest/* extends FluentTest*/{
             failIfOtherTestsFailed();
             //Use Chromedriver, because if a test ever fails, you'd see it happen if you were watching
 
-            running(testServer(), new ChromeDriver(), browser -> {
+            running(server, new ChromeDriver(), browser -> {
                 //Sign in as default admin
                 browser.goTo("/");
                 browser.$("input[name='email']").fill().with("admin");
