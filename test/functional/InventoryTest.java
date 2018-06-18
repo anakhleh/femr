@@ -86,7 +86,7 @@ public class InventoryTest/* extends FluentTest*/{
         public InventoryTest() {
 
             // Sets the location of the chrome driver
-            System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+//            System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
 
             // Build an application in Test mode
             // conf/application.test.conf is loaded by default (defined in build.sbt)
@@ -164,7 +164,7 @@ public class InventoryTest/* extends FluentTest*/{
             failIfOtherTestsFailed();
             //Use Chromedriver, because if a test ever fails, you'd see it happen if you were watching
 
-            running(server, new ChromeDriver(), browser -> {
+            running(server, new HtmlUnitDriver(true), browser -> {
                 //Sign in as default admin
                 browser.goTo("/");
                 browser.$("input[name='email']").fill().with("admin");
@@ -219,7 +219,7 @@ public class InventoryTest/* extends FluentTest*/{
         @Test
         public void b_createTripsAndAssignSelfToAllTrips(){
 
-            running(testServer(), new HtmlUnitDriver(true), browser -> {
+            running(server, new HtmlUnitDriver(true), browser -> {
                 //Get login page
                 browser.goTo("/");
 
@@ -380,7 +380,7 @@ public class InventoryTest/* extends FluentTest*/{
 //
         @Test
         public void c_populateAllThreeInventoriesWithExistingMedicationsThatHaveBrandNames(){
-            running(testServer(), new HtmlUnitDriver(true), browser ->{
+            running(server, new HtmlUnitDriver(true), browser ->{
                 //Get login page
                 browser.goTo("/");
                 System.out.println("in c0");
@@ -452,7 +452,7 @@ public class InventoryTest/* extends FluentTest*/{
 //
         @Test
         public void d_populateInventoryWithCustomMedications(){
-            running(testServer(), new HtmlUnitDriver(true), browser -> {
+            running(server, new HtmlUnitDriver(true), browser -> {
                 //Get login page
                 browser.goTo("/");
 
@@ -502,7 +502,7 @@ public class InventoryTest/* extends FluentTest*/{
 //////
         @Test
         public void e_RemoveReaddButtonOnAllInventoriesExistingMedications(){
-            running(testServer(), new HtmlUnitDriver(true), browser->{
+            running(server, new HtmlUnitDriver(true), browser->{
                 //Get login page
                 browser.goTo("/");
 
