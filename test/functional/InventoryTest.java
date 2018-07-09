@@ -458,9 +458,9 @@ public class InventoryTest {
                     browser.$("td .sorting_1", withText("2")).present());
             assertTrue("Existing Med with medication id 3 should exist, but does not",
                     browser.$("td .sorting_1", withText("3")).present());
-            assertTrue("Custom Med with medication id 1 should exist, but does not",
+            assertTrue("Custom Med with medication id 4 should exist, but does not",
                     browser.$("td .sorting_1", withText("4")).present());
-//            browser.$("td .sorting_1", withText("4"));
+            browser.$("td .sorting_1", withText("4"));
         }
 
         try{Thread.sleep(10000000);}catch(Exception e){}
