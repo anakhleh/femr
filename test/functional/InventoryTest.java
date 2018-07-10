@@ -91,7 +91,12 @@ public class InventoryTest {
     private static final String TEST_CUSTOM_MEDICATION_INITIAL_QUANTITY = ConfigFactory.load().getString("test.functional.inventorytest.customMedicationInitialQuantity");
     private static final List<String> TEST_CUSTOM_MEDICATION_INGREDIENTS = ConfigFactory.load().getStringList("test.functional.inventorytest.customMedicationIngredients");
     private static final List<String> TEST_CUSTOM_MEDICATION_INGREDIENTS_STRENGTHS = ConfigFactory.load().getStringList("test.functional.inventorytest.customMedicationIngredientsStrengths");
-
+    private static final String ALL_MEDICATIONS_EVENTUAL_TOTAL_AND_INITIAL_QUANTITY = ConfigFactory.load().getString("test.functional.inventorytest.eventuallySetMedicationQuantitiesTo");
+    private static final String TEST_PATIENT_FIRST_NAME = ConfigFactory.load().getString("test.functional.inventorytest.testPatientFirstName");
+    private static final String TEST_PATIENT_LAST_NAME = ConfigFactory.load().getString("test.functional.inventorytest.testPatientLastName");
+    private static final String TEST_PATIENT_CITY = ConfigFactory.load().getString("test.functional.inventorytest.testPatientCity");
+    private static final String TEST_PATIENT_AGE_YEARS = ConfigFactory.load().getString("test.functional.inventorytest.testPatientAgeYears");
+    private static final String TEST_PATIENT_AGE_MONTHS = ConfigFactory.load().getString("test.functional.inventorytest.testPatientAgeMonths");
     /**
      * Test-Boilerplate related fields
      */
@@ -558,11 +563,11 @@ public class InventoryTest {
 
             //click buttons to be able to edit, then edit initial medication quantity
             browser.$(".totalQuantity button").click();
-            browser.$(".totalQuantity input[type='number']").fill().with("5");
+            browser.$(".totalQuantity input[type='number']").fill().with(ALL_MEDICATIONS_EVENTUAL_TOTAL_AND_INITIAL_QUANTITY);
 
             //click buttons to be able to edit, then edit current medication quantity
             browser.$(".currentQuantity button").click();
-            browser.$(".currentQuantity input[type='number']").fill().with("5");
+            browser.$(".currentQuantity input[type='number']").fill().with(ALL_MEDICATIONS_EVENTUAL_TOTAL_AND_INITIAL_QUANTITY);
 
             //refresh page , then check to make sure that inventory quantities set actually hit the DB
             browser.goTo(browser.url());
@@ -571,8 +576,8 @@ public class InventoryTest {
             List<FluentWebElement> initialQuantityTds = browser.$(".totalQuantity");
             List<FluentWebElement> currentQuantityTds = browser.$(".currentQuantity");
             for(int j = 0; j < 4; j++){
-                initialQuantityTds.get(j).$("span", withText("4"));
-                currentQuantityTds.get(j).$("span", withText("4"));
+                initialQuantityTds.get(j).$("span", withText(ALL_MEDICATIONS_EVENTUAL_TOTAL_AND_INITIAL_QUANTITY));
+                currentQuantityTds.get(j).$("span", withText(ALL_MEDICATIONS_EVENTUAL_TOTAL_AND_INITIAL_QUANTITY));
             }
 
         }
@@ -619,7 +624,25 @@ public class InventoryTest {
 
     }
 
-    private static void __private__CreateTestPatientThroughTriage(TestBrowser browser){}
+    private static void __private__CreateTestPatientThroughTriage(TestBrowser browser){
+        browser.$("a", withText("Triage")).click();
+
+        //fill in form minimally
+        browser.$("#firstName").fill().with(TEST_PATIENT_FIRST_NAME);
+        browser.$("#lastName").fill().with(TEST_PATIENT_LAST_NAME);
+        browser.$("#city").fill().with(TEST_PATIENT_CITY);
+        browser.$("#years").fill().with(TEST_PATIENT_AGE_YEARS);
+        browser.$("#months").fill().with(TEST_PATIENT_AGE_MONTHS);
+        browser.$("#triageSubmitBtn").click();
+    }
+
+    private static void __private__PrescribeAllAddedMedications(TestBrowser browser){
+
+    }
+
+    private static void __private__CheckThatPrescribingReducedQuantityByOne(TestBrowser browser){}
+
+    private static void __private__RemoveAllMedsThenPrescriveAll
 
 
     @Test
@@ -742,12 +765,16 @@ public class InventoryTest {
         );
     }
 
+    @Test
+    public void m_CreateTestPatientThroughTriage() throws Throwable{
+        sequentialTestWrapper(
+                wrapLoginAndLogout(InventoryTest::__private__CreateTestPatientThroughTriage,
+                        TEST_ADMIN_USERNAME,
+                        TEST_ADMIN_INITIAL_PASSWORD
+                )
+        );
 
-
-//    @Test
-//    public void m_CreateTestPatientThroughTriage() throws Throwable{
-//
-//    }
+    }
 //
 //    @Test
 //    public void n_PrescribeAllFourMedsThrough() throws Throwable{
