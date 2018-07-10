@@ -470,6 +470,7 @@ public class InventoryTest {
 
 //        try{Thread.sleep(10000000);}catch(Exception e){}
 
+        
 
     }
 
@@ -642,13 +643,14 @@ public class InventoryTest {
 
     private static void __private__CheckThatPrescribingReducedQuantityByOne(TestBrowser browser){}
 
-    private static void __private__RemoveAllMedsThenPrescriveAll
+    private static void __private__RemoveAllMedsThenPrescriveAllOfThem(TestBrowser browser){}
 
 
     @Test
     public void a_createAdminUserAndSignInAsNewAdmin() throws Throwable {
         sequentialTestWrapper(
-                wrapLoginAndLogout(InventoryTest::__private__createAdminUserAndSignInAsNewAdmin,
+                wrapLoginAndLogout(
+                        InventoryTest::__private__createAdminUserAndSignInAsNewAdmin,
                         DEFAULT_ADMIN_USERNAME,
                         DEFAULT_ADMIN_PASSWORD
                 )
@@ -658,7 +660,8 @@ public class InventoryTest {
     @Test
     public void b_createTripsAndAssignSelfToAllTrips() throws Throwable{
         sequentialTestWrapper(
-                wrapLoginAndLogout(InventoryTest::__private__createTripsAndAssignSelfToAllTrips,
+                wrapLoginAndLogout(
+                        InventoryTest::__private__createTripsAndAssignSelfToAllTrips,
                         TEST_ADMIN_USERNAME,
                         TEST_ADMIN_INITIAL_PASSWORD
                 )
@@ -679,7 +682,8 @@ public class InventoryTest {
     @Test
     public void d_populateAllThreeInventoriesWithCustomMedications() throws Throwable{
         sequentialTestWrapper(
-                wrapLoginAndLogout(InventoryTest::__private__populateInventoryWithCustomMedications,
+                wrapLoginAndLogout(
+                        InventoryTest::__private__populateInventoryWithCustomMedications,
                         TEST_ADMIN_USERNAME,
                         TEST_ADMIN_INITIAL_PASSWORD
                 )
@@ -689,7 +693,8 @@ public class InventoryTest {
     @Test
     public void e_RemoveReaddButtonOnAllThreeInventoriesExistingMedications() throws Throwable{
         sequentialTestWrapper(
-                wrapLoginAndLogout(InventoryTest::__private__RemoveReaddButtonOnAllInventoriesExistingMedications,
+                wrapLoginAndLogout(
+                        InventoryTest::__private__RemoveReaddButtonOnAllInventoriesExistingMedications,
                         TEST_ADMIN_USERNAME,
                         TEST_ADMIN_INITIAL_PASSWORD
                 )
@@ -699,7 +704,8 @@ public class InventoryTest {
     @Test
     public void f_RemoveAllExistingMedicationsAllThreeInventories() throws Throwable{
         sequentialTestWrapper(
-                wrapLoginAndLogout(InventoryTest::__private__RemoveAllExistingMedicationsAllThreeInventories,
+                wrapLoginAndLogout(
+                        InventoryTest::__private__RemoveAllExistingMedicationsAllThreeInventories,
                         TEST_ADMIN_USERNAME,
                         TEST_ADMIN_INITIAL_PASSWORD
                 )
@@ -709,7 +715,8 @@ public class InventoryTest {
     @Test
     public void g_ManuallyReaddExistingMedicationsAllThreeInventories() throws Throwable{
         sequentialTestWrapper(
-                wrapLoginAndLogout(InventoryTest::__private__ManuallyReaddExistingMedicationsAllThreeInventories,
+                wrapLoginAndLogout(
+                        InventoryTest::__private__ManuallyReaddExistingMedicationsAllThreeInventories,
                         TEST_ADMIN_USERNAME,
                         TEST_ADMIN_INITIAL_PASSWORD
                 )
@@ -719,7 +726,8 @@ public class InventoryTest {
     @Test
     public void h_RemoveCustomMedicationInventoriesAllThreeInventories() throws Throwable{
         sequentialTestWrapper(
-                wrapLoginAndLogout(InventoryTest::__private__RemoveCustomMedicationInventoriesAllThreeInventories,
+                wrapLoginAndLogout(
+                        InventoryTest::__private__RemoveCustomMedicationInventoriesAllThreeInventories,
                         TEST_ADMIN_USERNAME,
                         TEST_ADMIN_INITIAL_PASSWORD)
         );
@@ -728,7 +736,8 @@ public class InventoryTest {
     @Test
     public void i_ManuallyReaddCustomMedicationInventoriesAllThreeInventories() throws Throwable{
         sequentialTestWrapper(
-                wrapLoginAndLogout(InventoryTest::__private__ManuallyReaddCustomMedicationInventoriesAllThreeInventories,
+                wrapLoginAndLogout(
+                        InventoryTest::__private__ManuallyReaddCustomMedicationInventoriesAllThreeInventories,
                         TEST_ADMIN_USERNAME,
                         TEST_ADMIN_INITIAL_PASSWORD
                 )
@@ -738,7 +747,20 @@ public class InventoryTest {
     @Test
     public void j_SetMedicationQuantitiesToFiveEachAllThreeInventories() throws Throwable {
         sequentialTestWrapper(
-                wrapLoginAndLogout(InventoryTest::__private__SetMedicationQuantitiesToFiveEachAllThreeInventories,
+                wrapLoginAndLogout(
+                        InventoryTest::__private__SetMedicationQuantitiesToFiveEachAllThreeInventories,
+                        TEST_ADMIN_USERNAME,
+                        TEST_ADMIN_INITIAL_PASSWORD
+                )
+        );
+        System.out.println("SETMEDSWORKED");
+    }
+
+    @Test
+    public void k_TurnOffAllAdminConfigOptions() throws Throwable{
+        sequentialTestWrapper(
+                wrapLoginAndLogout(
+                        InventoryTest::__private__TurnOnAllAdminConfigOptions,
                         TEST_ADMIN_USERNAME,
                         TEST_ADMIN_INITIAL_PASSWORD
                 )
@@ -746,29 +768,22 @@ public class InventoryTest {
     }
 
     @Test
-    public void l_TurnOffAllAdminConfigOptions() throws Throwable{
+    public void l_TurnOnAllAdminConfigOptions() throws Throwable{
         sequentialTestWrapper(
-                wrapLoginAndLogout(InventoryTest::__private__TurnOnAllAdminConfigOptions,
+                wrapLoginAndLogout(
+                        InventoryTest::__private__TurnOffAllAdminConfigOptions,
                         TEST_ADMIN_USERNAME,
                         TEST_ADMIN_INITIAL_PASSWORD
                 )
         );
-    }
-
-    @Test
-    public void k_TurnOnAllAdminConfigOptions() throws Throwable{
-        sequentialTestWrapper(
-                wrapLoginAndLogout(InventoryTest::__private__TurnOffAllAdminConfigOptions,
-                        TEST_ADMIN_USERNAME,
-                        TEST_ADMIN_INITIAL_PASSWORD
-                )
-        );
+        System.out.println("AFTERCONFIGS");
     }
 
     @Test
     public void m_CreateTestPatientThroughTriage() throws Throwable{
         sequentialTestWrapper(
-                wrapLoginAndLogout(InventoryTest::__private__CreateTestPatientThroughTriage,
+                wrapLoginAndLogout(
+                        InventoryTest::__private__CreateTestPatientThroughTriage,
                         TEST_ADMIN_USERNAME,
                         TEST_ADMIN_INITIAL_PASSWORD
                 )
