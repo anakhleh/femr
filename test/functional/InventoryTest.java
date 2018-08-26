@@ -9,9 +9,7 @@ import org.junit.runners.MethodSorters;
 import static org.fluentlenium.core.filter.MatcherConstructor.regex;
 import static org.junit.Assert.*;
 
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import org.fluentlenium.core.domain.*;
@@ -19,17 +17,13 @@ import static org.fluentlenium.core.filter.FilterConstructor.*;
 
 import play.Application;
 import play.Mode;
-import play.api.Configuration;
 import play.inject.guice.GuiceApplicationBuilder;
 import play.test.*;
 //import play.Logger;
 import static play.test.Helpers.*;
 
-import javax.inject.*;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 /**
  * What is this?
@@ -405,9 +399,8 @@ public class InventoryTest {
 //            try{Thread.sleep(1000);} catch(Exception e){}
             System.out.println("SUBMITTED");
             //check that the meds were actually put there. just see if med is there, fluentium will throw exception if they're not there.
-                    browser.$("td .sorting_1", withText().contains("4"));// medication id of custom med
+            browser.$("td .sorting_1", withText().contains("4"));// medication id of custom med
             System.out.println("ITS THERE 1");
-            browser.$(".editCurrentQuantity", withText().contains("2")); //should be the only thing with quantity two
             browser.$(".editCurrentQuantity", withText().contains("2")); //should be the only thing with quantity two
             System.out.println("ITS THERE 2");
             System.out.println("ITS THERE 3");
@@ -637,158 +630,184 @@ public class InventoryTest {
         browser.$("#triageSubmitBtn").click();
     }
 
-    private static void __private__PrescribeAllAddedMedications(TestBrowser browser){
+    private static void __private__PrescribeAllAddedExistingMedications(TestBrowser browser){
+        browser.$("a", withText("Medical")).click();
+
+        //fill patient search with patient id; Assume 1 patient, so patient id is 1
+        browser.$("#id").fill().with("1");
+        browser.$("button", withText("Search"));
+
+        //hit treatement tab, prescribe meds
+        browser.$("#treatment").click();
+        browser.$("#addPrescriptionButton").click();
+        browser.$("#addPrescriptionButton").click();
+
+        for(int i  = 0; i < 3; i++){
+            browser.$("input", withName("prescriptions["+i+"].medicationName")).fill().with(TEST_EXISTING_MEDICATIONS.get(i));
+            browser.$("select", withName("prescriptions["+i+"].administrationID")).fillSelect().withText("q24h");
+            browser.$();
+            browser.$("input[name='prescriptions["+i+".amount'] [value='1']");
+        }
 
     }
 
-    private static void __private__CheckThatPrescribingReducedQuantityByOne(TestBrowser browser){}
+    private static void __private__PrescribeAllAddedCustomMedications(TestBrowser browser){
 
-    private static void __private__RemoveAllMedsThenPrescriveAllOfThem(TestBrowser browser){}
+    }
+
+    private static void __private__CheckThatPrescribingAddedMedicationsReducedQuantityByOne(TestBrowser browser){
+
+    }
+
+    private static void __private__HideAllAddedMedicationsByRemovingThem(TestBrowser browser){
+
+    }
+
+    private static void __private__PrescribeRemovedExistingMedications(TestBrowser browser){
+
+    }
+
+    private static void __private__PrescribeRemovedCustomMedication(TestBrowser browser){
+
+    }
+
+    private static void __private__CheckThatPrescribingRemovedMedicationsDecrementedQuantityByOne(TestBrowser browser){
+
+    }
+
+    private static void __private__RemoveAllMedsThenPrescriveAllOfThem(TestBrowser browser){
+
+    }
+
+    private static void __private__CheckThatPrescribingAddedMedicationsDecrementedQuantityByOne(TestBrowser browser){
+
+    }
 
 
     @Test
     public void a_createAdminUserAndSignInAsNewAdmin() throws Throwable {
-        sequentialTestWrapper(
-                wrapLoginAndLogout(
-                        InventoryTest::__private__createAdminUserAndSignInAsNewAdmin,
-                        DEFAULT_ADMIN_USERNAME,
-                        DEFAULT_ADMIN_PASSWORD
-                )
+        wrapLoginAndLogout(
+                InventoryTest::__private__createAdminUserAndSignInAsNewAdmin,
+                DEFAULT_ADMIN_USERNAME,
+                DEFAULT_ADMIN_PASSWORD
         );
     }
 
     @Test
     public void b_createTripsAndAssignSelfToAllTrips() throws Throwable{
-        sequentialTestWrapper(
-                wrapLoginAndLogout(
+        wrapLoginAndLogout(
                         InventoryTest::__private__createTripsAndAssignSelfToAllTrips,
                         TEST_ADMIN_USERNAME,
                         TEST_ADMIN_INITIAL_PASSWORD
-                )
         );
     }
 
     @Test
     public void c_populateAllThreeInventoriesWithExistingMedicationsThatHaveBrandNames() throws Throwable{
-        sequentialTestWrapper(
-                wrapLoginAndLogout(
-                        InventoryTest::__private__populateAllThreeInventoriesWithExistingMedicationsThatHaveBrandNames,
-                        TEST_ADMIN_USERNAME,
-                        TEST_ADMIN_INITIAL_PASSWORD
-                )
+        wrapLoginAndLogout(
+                InventoryTest::__private__populateAllThreeInventoriesWithExistingMedicationsThatHaveBrandNames,
+                TEST_ADMIN_USERNAME,
+                TEST_ADMIN_INITIAL_PASSWORD
         );
     }
 
     @Test
     public void d_populateAllThreeInventoriesWithCustomMedications() throws Throwable{
-        sequentialTestWrapper(
-                wrapLoginAndLogout(
-                        InventoryTest::__private__populateInventoryWithCustomMedications,
-                        TEST_ADMIN_USERNAME,
-                        TEST_ADMIN_INITIAL_PASSWORD
-                )
+        wrapLoginAndLogout(
+                InventoryTest::__private__populateInventoryWithCustomMedications,
+                TEST_ADMIN_USERNAME,
+                TEST_ADMIN_INITIAL_PASSWORD
         );
     }
 
     @Test
     public void e_RemoveReaddButtonOnAllThreeInventoriesExistingMedications() throws Throwable{
-        sequentialTestWrapper(
-                wrapLoginAndLogout(
-                        InventoryTest::__private__RemoveReaddButtonOnAllInventoriesExistingMedications,
-                        TEST_ADMIN_USERNAME,
-                        TEST_ADMIN_INITIAL_PASSWORD
-                )
+        wrapLoginAndLogout(
+                InventoryTest::__private__RemoveReaddButtonOnAllInventoriesExistingMedications,
+                TEST_ADMIN_USERNAME,
+                TEST_ADMIN_INITIAL_PASSWORD
         );
     }
 
     @Test
     public void f_RemoveAllExistingMedicationsAllThreeInventories() throws Throwable{
-        sequentialTestWrapper(
-                wrapLoginAndLogout(
-                        InventoryTest::__private__RemoveAllExistingMedicationsAllThreeInventories,
-                        TEST_ADMIN_USERNAME,
-                        TEST_ADMIN_INITIAL_PASSWORD
-                )
+        wrapLoginAndLogout(
+                InventoryTest::__private__RemoveAllExistingMedicationsAllThreeInventories,
+                TEST_ADMIN_USERNAME,
+                TEST_ADMIN_INITIAL_PASSWORD
         );
     }
 
     @Test
     public void g_ManuallyReaddExistingMedicationsAllThreeInventories() throws Throwable{
-        sequentialTestWrapper(
-                wrapLoginAndLogout(
-                        InventoryTest::__private__ManuallyReaddExistingMedicationsAllThreeInventories,
-                        TEST_ADMIN_USERNAME,
-                        TEST_ADMIN_INITIAL_PASSWORD
-                )
+        wrapLoginAndLogout(
+                InventoryTest::__private__ManuallyReaddExistingMedicationsAllThreeInventories,
+                TEST_ADMIN_USERNAME,
+                TEST_ADMIN_INITIAL_PASSWORD
         );
     }
 
     @Test
     public void h_RemoveCustomMedicationInventoriesAllThreeInventories() throws Throwable{
-        sequentialTestWrapper(
-                wrapLoginAndLogout(
-                        InventoryTest::__private__RemoveCustomMedicationInventoriesAllThreeInventories,
-                        TEST_ADMIN_USERNAME,
-                        TEST_ADMIN_INITIAL_PASSWORD)
+        wrapLoginAndLogout(
+                InventoryTest::__private__RemoveCustomMedicationInventoriesAllThreeInventories,
+                TEST_ADMIN_USERNAME,
+                TEST_ADMIN_INITIAL_PASSWORD
         );
     }
 
     @Test
     public void i_ManuallyReaddCustomMedicationInventoriesAllThreeInventories() throws Throwable{
-        sequentialTestWrapper(
-                wrapLoginAndLogout(
-                        InventoryTest::__private__ManuallyReaddCustomMedicationInventoriesAllThreeInventories,
-                        TEST_ADMIN_USERNAME,
-                        TEST_ADMIN_INITIAL_PASSWORD
-                )
+        wrapLoginAndLogout(
+                InventoryTest::__private__ManuallyReaddCustomMedicationInventoriesAllThreeInventories,
+                TEST_ADMIN_USERNAME,
+                TEST_ADMIN_INITIAL_PASSWORD
         );
     }
 
     @Test
     public void j_SetMedicationQuantitiesToFiveEachAllThreeInventories() throws Throwable {
-        sequentialTestWrapper(
-                wrapLoginAndLogout(
-                        InventoryTest::__private__SetMedicationQuantitiesToFiveEachAllThreeInventories,
-                        TEST_ADMIN_USERNAME,
-                        TEST_ADMIN_INITIAL_PASSWORD
-                )
+        wrapLoginAndLogout(
+                InventoryTest::__private__SetMedicationQuantitiesToFiveEachAllThreeInventories,
+                TEST_ADMIN_USERNAME,
+                TEST_ADMIN_INITIAL_PASSWORD
         );
-        System.out.println("SETMEDSWORKED");
     }
 
     @Test
     public void k_TurnOffAllAdminConfigOptions() throws Throwable{
-        sequentialTestWrapper(
-                wrapLoginAndLogout(
-                        InventoryTest::__private__TurnOnAllAdminConfigOptions,
-                        TEST_ADMIN_USERNAME,
-                        TEST_ADMIN_INITIAL_PASSWORD
-                )
+        wrapLoginAndLogout(
+                InventoryTest::__private__TurnOnAllAdminConfigOptions,
+                TEST_ADMIN_USERNAME,
+                TEST_ADMIN_INITIAL_PASSWORD
         );
     }
 
     @Test
     public void l_TurnOnAllAdminConfigOptions() throws Throwable{
-        sequentialTestWrapper(
-                wrapLoginAndLogout(
-                        InventoryTest::__private__TurnOffAllAdminConfigOptions,
-                        TEST_ADMIN_USERNAME,
-                        TEST_ADMIN_INITIAL_PASSWORD
-                )
+        wrapLoginAndLogout(
+                InventoryTest::__private__TurnOffAllAdminConfigOptions,
+                TEST_ADMIN_USERNAME,
+                TEST_ADMIN_INITIAL_PASSWORD
         );
-        System.out.println("AFTERCONFIGS");
     }
 
     @Test
     public void m_CreateTestPatientThroughTriage() throws Throwable{
-        sequentialTestWrapper(
-                wrapLoginAndLogout(
-                        InventoryTest::__private__CreateTestPatientThroughTriage,
-                        TEST_ADMIN_USERNAME,
-                        TEST_ADMIN_INITIAL_PASSWORD
-                )
+        wrapLoginAndLogout(
+                InventoryTest::__private__CreateTestPatientThroughTriage,
+                TEST_ADMIN_USERNAME,
+                TEST_ADMIN_INITIAL_PASSWORD
         );
+    }
 
+    @Test
+    public void n_DispenseAllExistingMedicationsToTestPatient() throws Throwable{
+        wrapLoginAndLogout(
+                InventoryTest::__private__PrescribeAllAddedExistingMedications,
+                TEST_ADMIN_USERNAME,
+                TEST_ADMIN_INITIAL_PASSWORD
+        );
     }
 //
 //    @Test
