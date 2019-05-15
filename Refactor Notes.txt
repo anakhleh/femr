@@ -1,0 +1,108 @@
+All Visible Pages in application:
+
+Log In Page
+    - Log in - uname + password
+
+Home
+    - search patient by id, name, phone #
+    - log out
+
+Medical Search + Medical
+    - search by patientid
+        - if found and closed, say so
+    - if open encounter, go to medical page
+        - medical page
+    - Vitals
+        - BP
+        - HR
+        -T
+        -RR
+        -Blue
+        -SpO2
+        - WP
+        - Ht
+        - Wt
+        - Smoking
+        - Diabetes
+        - Alcohol
+    - HPI
+        - Onset
+        - Quality
+        - Radiation
+        - Severity
+        - Provokes
+        - Palliates
+        - Time of Day
+        - Narrative
+        - Physical Exam
+    - Treatment
+        - Assessment
+        - Diagnosis LIST
+        - Prescriptions LIST
+            - name String
+            - Administration ENUM
+            - Days int
+            - Amount REAL
+        - Procedure/Counselling
+        - Pharmacy Note
+    - PMH
+        - Medical/Surgical History TEXT
+        - Social History TEXT
+        - Current Medications TEXT
+        - Family History TEXT
+    - Photos
+        - Upload + View
+        - Retrieve + View
+    - Record New Vitals button
+    - Patient History Button
+    - View in Pharmacy Button
+        - do search with patient ID
+
+- Patient History
+    - Demographics
+    - Previous Encounters
+        - Datetime
+        - ChiefComplaint
+    - See Patient in triage button
+    - View in Pharmacy button
+    - View in Medical button
+    - Delete Patient button
+    - Search by id, name, phone
+
+Triage
+    - Demographics
+        - First Name NN
+        - Last Name  NN
+        - Phone Number
+        - Adress
+        - City NN
+        - Age -> years/months or Birth date NN
+        - AgeGroup
+        - Gender
+        - PatientPhoto
+    - Vitals
+        - Temperature (C)
+        - Blood Pressure
+        - Heart Rate
+        - Respirations
+        - Weeks Pregnant
+        - O2 Saturation
+        - Height
+        - Weight
+        - BMI
+        - Glucose
+        - isSmoker
+        - isDiabetic
+        - usesAlcohol
+        - ChiefComplaint
+    - Search patient by id, name, phone #
+        - if found, populate form + show patient history button
+        - if has open encounter - show go to medical + show patient history button
+        - if not found - invalid patient
+
+- Pharmacy
+    - if no patient, say so
+    - if patient but encounter closed, say so
+    - if patient but encounter open, see if has prescriptions
+        - if has, let in
+        - if not, say so
