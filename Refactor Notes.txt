@@ -1,4 +1,14 @@
+Notes of what's on each page. Notes taken to keeep track of where
+a refactor of one area might affect another, or in case of a major rehaul
+of several sections. This document is likely to have some holes in it
+
 All Visible Pages in application:
+
+- Target Client - Chrome - Desktop Usage
+
+Leave Feedback Page:
+- Text Feedback
+    - id, date, feedback
 
 Log In Page
     - Log in - uname + password
@@ -106,3 +116,117 @@ Triage
     - if patient but encounter open, see if has prescriptions
         - if has, let in
         - if not, say so
+
+- Checklist Page
+    - Display checklist
+
+- Manager
+    - Overview of Current Trip Patients Checked in today showing
+        - Patient ID
+        - Name
+        - Patient Information
+            - Gender
+            - Age
+            - City
+        - Chief Complaint
+        - Triage Check-in
+        - Medical Check-In Time
+        - Pharmacy Check-In Time
+        - Total Check-In Time
+            - if medication, ends at pharmacy submit
+            - if no meds, ends at medical submit
+
+Admin Page
+    - Configure Page
+        - Medical PMH Tab
+        - Diabetes prompt
+        - Country Filter
+        - Medical Photo Tab
+        - Multiple chief complaints
+        - metric system option
+    - Users Page
+        - Edit
+        - First Name
+        - Last Name
+        - Email
+        - About
+        - Roles
+        - Last Login
+        - Activate/deactivate
+    - Edit User Page
+        - Email
+        - first name
+        - last name
+        - about
+        - password reset
+        - change user password
+        - trips attended
+        - add/subtract roles
+    - Add User Page
+        - email address
+        - password + verify password
+        - first name
+        - last name
+        - about user
+        - assign roles
+    - Manage Trips
+        - Trip Team *
+        - Trip City *
+        - Trip Country
+        - Start Date *
+        - End Date *
+        - Submit
+        - Chart showing trips
+            - Team Name
+            - Haiti
+            - City
+            - Start Date
+            - End Date
+    - Manage Teams
+        - Team Name *
+        - Team Location *
+        - Team Description *
+        - Table showing teams'
+            - team name
+            - description
+            - origin
+            - search
+    - Manage Cities
+        - City *
+        - Country *
+        - search
+    - Edit Trip
+        - Add users to trip
+        - Remove users from trip
+        - show users on trip
+            - first name
+            - last name
+            - email
+            - about
+    - Inventory
+        - Select trip to view
+        - search meds
+        - current Formulary
+            - medication
+            - current quantity + Set Current quantity
+            - Initial quantity + Set initial quantity
+            - Date Added
+            - Added By
+            - Remove/Readd
+        - Add Existing Medication
+            - add set of medications in formulary dictionary
+        - Add Custom Medicine To Formulary
+            - Brand
+            - Quantity
+            - Generic
+            - Strength
+            - Form - caps, crm, etc
+            - strength
+            - Unit
+            - add multiple custom meds at a time
+        - Desired - Entry by NDC Code
+        - CSV Export
+
+
+
+    
