@@ -1,6 +1,19 @@
-tables without relationships:
-systen_settings
-play_evolutions
-feedback
+Idea - Support NDC Codes
 
-user has one or more patients (enforced twice?)
+- instead of medication generics and manual entry, enter meds by ndc codes
+- enter new packages purely by ndc code
+- enter opened packaged by the 8or9-character ndc code (numbers before the last hyphen), then require manual entry of quantity information
+- Custom medications can be entered via 8or9-character ndc codes (numbers before the last hyphen), then quantity values can be given manually.
+
+Rough Table Structure
+- NDC_Product ID PRODUCTID	PRODUCTNDC	NDCPACKAGECODE	PACKAGEDESCRIPTION
+    - for opened things
+- NDC_Package - ID  PRODUCTID PRODUCTNDC PRODUCTNDCPROPRIETARYNAME PROPRIETARYNAMESUFFIX NONPROPRIETARYNAME ACTIVE_NUMERATOR_STRENGTH	ACTIVE_INGRED_UNIT
+    - for unopened things
+
+- InventoryMed (id, ndc_id, quantity_initial, quantity_used)
+    - Description would have to be something like 'PROPRIETARYNAME (NONPROPRIETARYNAME) ACTIVE_NUMERATOR_STRENGTH ACTIVE_INGRED_UNIT'
+    - No relationships between ndc and inventorymed tables, the NDC ones would be used only for construction of an InventoryMed
+
+custom meds can have 1+ ingredients though,
+so just use what you've got to create the name
