@@ -1,0 +1,6 @@
+tables without relationships:
+systen_settings
+play_evolutions
+feedback
+
+user has one or more patients (enforced twice?)
