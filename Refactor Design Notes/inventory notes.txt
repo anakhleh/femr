@@ -16,4 +16,4 @@ Rough Table Structure
     - No relationships between ndc and inventorymed tables, the NDC ones would be used only for construction of an InventoryMed
 
 custom meds can have 1+ ingredients though,
-so just use what you've got to create the name
+so just use what you've got to create the name.
