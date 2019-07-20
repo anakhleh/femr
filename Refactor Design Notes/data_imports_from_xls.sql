@@ -122,6 +122,11 @@ change `PRODUCTID` `product_id` text,
 change `PRODUCTNDC` `product_ndc` text,
 change `NDCPACKAGECODE` `ndc_package_code` text;
 
+ALTER TABLE medication_product
+change `product_id` `product_id` varchar(255),
+change `product_ndc` `product_ndc` varchar(255),
+add unique index(product_id, product_ndc),
+add medication_product_id int primary key;
 
 /*
 
